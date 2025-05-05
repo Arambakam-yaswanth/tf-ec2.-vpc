@@ -46,3 +46,4 @@ resource "aws_internet_gateway" "lms" {
     Name = "lms-internet_gateway"
   }
 }
+
