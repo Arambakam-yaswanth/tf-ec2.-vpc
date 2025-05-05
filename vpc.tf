@@ -181,5 +181,5 @@ resource "aws_network_acl_association" "lms-api-nacl-asc" {
 # lms db nacl association
 resource "aws_network_acl_association" "lms-db-nacl-asc" {
   network_acl_id = aws_network_acl.lms-db-nacl.id
-  subnet_id      = aws_subnet.lms-db-subnet.id
+  subnet_id      = aws_subnet.lms-database-subnet.id
 }
