@@ -116,7 +116,7 @@ resource "aws_network_acl" "lms-web-nacl" {
 }
 
 # network-api-acl
-resource "aws_network_acl" "lms-web-nacl" {
+resource "aws_network_acl" "lms-api-nacl" {
   vpc_id = aws_vpc.lms-vpc.id
 
   egress {
@@ -142,7 +142,7 @@ resource "aws_network_acl" "lms-web-nacl" {
   }
 }
 # network-db-acl
-resource "aws_network_acl" "lms-web-nacl" {
+resource "aws_network_acl" "lms-db-nacl" {
   vpc_id = aws_vpc.lms-vpc.id
 
   egress {
