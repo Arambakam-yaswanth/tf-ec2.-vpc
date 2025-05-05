@@ -85,6 +85,6 @@ resource "aws_route_table_association" "lms-api-asc" {
 
 # route-table-association 
 resource "aws_route_table_association" "lms-db-asc" {
-  subnet_id      = aws_subnet.lms-db-subnet.id
+  subnet_id      = aws_subnet.lms-database-subnet.id
   route_table_id = aws_route_table.lms-pvt-rt.id
 }
