@@ -71,4 +71,20 @@ resource "aws_route_table" "lms-pvt-rt" {
     Name = "lms-private-route"
   }
 }
+# route-table-association 
+resource "aws_route_table_association" "lms-web-asc" {
+  subnet_id      = aws_subnet.lms-web-subnet.id
+  route_table_id = aws_route_table.lms-pub-rt.id
+}
 
+# route-table-association 
+resource "aws_route_table_association" "lms-api-asc" {
+  subnet_id      = aws_subnet.lms-api-subnet.id
+  route_table_id = aws_route_table.lms-pub-rt.id
+}
+
+# route-table-association 
+resource "aws_route_table_association" "lms-db-asc" {
+  subnet_id      = aws_subnet.lms-db-subnet.id
+  route_table_id = aws_route_table.lms-pvt-rt.id
+}
