@@ -49,3 +49,36 @@ resource "aws_internet_gateway" "lms" {
   }
 }
 
+# lms public route table
+resource "aws_route_table" "lms-pub-rt" {
+  vpc_id = aws_vpc.lms-vpc.id
+
+  route {
+    cidr_block = "0.0.0.0/0"
+    gateway_id = aws_internet_gateway.lms.id
+  }
+
+  route {
+    ipv6_cidr_block        = "::/0"
+    egress_only_gateway_id = aws_egress_only_internet_gateway.example.id
+  }
+
+  tags = {
+    Name = "lms-public-route"
+  }
+}
+
+# lms private route table
+resource "aws_route_table" "lms-pvt-rt" {
+  vpc_id = aws_vpc.lms-vpc.id
+
+  route {
+    ipv6_cidr_block        = "::/0"
+    egress_only_gateway_id = aws_egress_only_internet_gateway.example.id
+  }
+
+  tags = {
+    Name = "lms-private-route"
+  }
+}
+
