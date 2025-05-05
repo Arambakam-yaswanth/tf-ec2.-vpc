@@ -12,20 +12,20 @@ resource "aws_vpc" "lms-vpc" {
 resource "aws_subnet" "lms-web-subnet" {
   vpc_id     = aws_vpc.lms-vpc.id
   cidr_block = "10.0.1.0/24"
-  map_public_ip_on_launch = "true"
+  map_public_ip_on_launch ="true"
 
   tags = {
-    Name = "lms-database-subnet"
+    Name = "lms-web-subnet"
   }
 }
 # api subnet 
 resource "aws_subnet" "lms-api-subnet" {
   vpc_id     = aws_vpc.lms-vpc.id
   cidr_block = "10.0.2.0/24"
-  map_public_ip_on_launch = "true"
+  map_public_ip_on_launch ="true"
 
   tags = {
-    Name = "lms-database-subnet"
+    Name = "lms-api-subnet"
   }
 }
 
