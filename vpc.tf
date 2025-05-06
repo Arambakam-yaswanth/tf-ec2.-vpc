@@ -217,3 +217,74 @@ resource "aws_vpc_security_group_egress_rule" "allow_all_traffic_ipv4" {
   cidr_ipv4         = "0.0.0.0/0"
   ip_protocol       = "-1" # semantically equivalent to all ports
 }
+
+#lms api security_group
+resource "aws_security_group" "lms-api-sg" {
+  name        = "lms-api-sg"
+  description = "Allow SSH & Nodejs traffic"
+  vpc_id      = aws_vpc.lms-vpc.id
+
+  tags = {
+    Name = "lms-api-sg"
+  }
+}
+
+# lms api security_group ingress
+resource "aws_vpc_security_group_ingress_rule" "lms-api-sg-ingress-ssh" {
+  security_group_id = aws_security_group.lms-api-sg.id
+  cidr_ipv4 = "0.0.0.0/0"
+  from_port         = 22
+  ip_protocol       = "tcp"
+  to_port           = 22
+}
+
+resource "aws_vpc_security_group_ingress_rule" "lms-api-sg-ingress-nodejs" {
+  security_group_id = aws_security_group.lms-api-sg.id
+  cidr_ipv4         ="0.0.0.0/0"
+  from_port         = 8080
+  ip_protocol       = "tcp"
+  to_port           = 8080
+}
+
+# lms api security_group egress
+resource "aws_vpc_security_group_egress_rule" "lms-api-sg-egress" {
+  security_group_id = aws_security_group.lms-api-sg.id
+  cidr_ipv4         = "0.0.0.0/0"
+  ip_protocol       = "-1" # semantically equivalent to all ports
+}#
+#db
+
+#lms db security_group
+resource "aws_security_group" "lms-db-sg" {
+  name        = "lms-db-sg"
+  description = "Allow SSH & postgres traffic"
+  vpc_id      = aws_vpc.lms-vpc.id
+
+  tags = {
+    Name = "lms-db-sg"
+  }
+}
+
+# lms db security_group ingress
+resource "aws_vpc_security_group_ingress_rule" "lms-db-sg-ingress-ssh" {
+  security_group_id = aws_security_group.lms-db-sg.id
+  cidr_ipv4 = "0.0.0.0/0"
+  from_port         = 22
+  ip_protocol       = "tcp"
+  to_port           = 22
+}
+
+resource "aws_vpc_security_group_ingress_rule" "lms-db-sg-ingress-postgres" {
+  security_group_id = aws_security_group.lms-db-sg.id
+  cidr_ipv4         ="0.0.0.0/0"
+  from_port         = 5432
+  ip_protocol       = "tcp"
+  to_port           = 5432
+}
+
+# lms api security_group egress
+resource "aws_vpc_security_group_egress_rule" "lms-db-sg-egress" {
+  security_group_id = aws_security_group.lms-db-sg.id
+  cidr_ipv4         = "0.0.0.0/0"
+  ip_protocol       = "-1" # semantically equivalent to all ports
+}#
