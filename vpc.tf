@@ -197,7 +197,7 @@ resource "aws_security_group" "lms-web-sg" {
 # lms web security_group ingress
 resource "aws_vpc_security_group_ingress_rule" "lms-web-sg-ingress-ssh" {
   security_group_id = aws_security_group.lms-web-sg.id
-  cidr_ipv4         = 0.0.0.0/0
+  cidr_ipv4 = "0.0.0.0/0"
   from_port         = 22
   ip_protocol       = "tcp"
   to_port           = 22
